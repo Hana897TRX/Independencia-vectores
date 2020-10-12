@@ -1,1 +1,0 @@
-import {btnAccept} from 'index'
