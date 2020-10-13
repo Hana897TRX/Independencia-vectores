@@ -23,8 +23,8 @@ function removeTextBox(){
         btnComprobate.parentNode.removeChild(btnComprobate);
         controlVectors.innerHTML += '<div id="vectorsContent" class="container-fluid"></div>';
         controlVectors.innerHTML += '<button id="btnComprobate"type="button" class="btn btn-primary btn-lg btn-block">Comprobar linealidad.</button>';
-        //controlVectors.style.display = 'none';
         inputVectors.style.display = 'contents';
+        contVectors.style.display = 'none';
     }
 }
 
@@ -57,6 +57,8 @@ function getInformation(){
 }
 
 function GenerateInputText(col, rows){
+    inputVectors.style.display = 'none';
+    contVectors.style.display = 'contents';
     let addSpace = '<br>';
     let addRow1 = '<div id="';
     let addRow2 = '" class="row"></div>'
