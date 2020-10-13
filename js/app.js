@@ -18,7 +18,8 @@ function getInformation(){
     let configWait = document.getElementById("inputVectors");
     let dimension = GetOptionRX();
     console.log(dimension);
-    //Verification variable
+
+    //Verification part
     if (isNaN(vertNumber) || vertNumber == ""){
         alert("Input must be a number.");
         return -1;
@@ -42,7 +43,7 @@ function getInformation(){
 
 function Create2DArray(x, y){
     matrix = new Array(x);
-    for(var i = 0; i < matrix.length; i++)
+    for(var i = 0; i < y; i++)
         matrix[i] = new Array(x);
 }
 
@@ -58,6 +59,7 @@ function GenerateInputText(col, rows){
         let temprow = addRow1 + "row" + y.toString() + addRow2;
         position.innerHTML += temprow;
         let supPosition = document.getElementById("row" + y.toString())
+
         for(var x = 0; x < col; x++){
             let tempInput = addCol + "tempText" + number.toString() + addInput2;
             supPosition.innerHTML += addSpace;
@@ -65,7 +67,7 @@ function GenerateInputText(col, rows){
             supPosition.innerHTML += addSpace;
             supPosition.innerHTML += addSpace;
             matrix[y][x] = "tempText" + number.toString();
-                console.debug(matrix[y][x]);
+            console.debug(matrix[y][x]);
             number++;
         }
     }
