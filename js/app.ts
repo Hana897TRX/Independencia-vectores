@@ -1,19 +1,20 @@
+//Components
+const numVectors = document.getElementById("inputText");
+const btnAccept = document.getElementById("btnAccept");
+const inputVectors = document.getElementById("inputVectors");
+let contVectors = document.getElementById("contVectors");
+
 let number = 0;
 let active = false;
-let inputVectors;
-let contVectors;
 
-window.onload = chargeListeners;
-
-function chargeListeners(){
-    var btnAccept = document.getElementById("btnAccept");
-    btnAccept.addEventListener("click", getInformation);
-}
+btnAccept.addEventListener("click", getInformation, false);
 
 function GetOptionRX(){
-    let r2 = (<HTMLInputElement>document.getElementById("r2")).checked;
-    let r3 = (<HTMLInputElement>document.getElementById("r3")).checked;
-    let r4 = (<HTMLInputElement>document.getElementById("r4")).checked;
+    let r2 = document.getElementById("r2");
+    let r3 = document.getElementById("r3");
+    let r4 = document.getElementById("r4");
+
+    console.debug(r2);
 
     if(r2)
         return 2;
@@ -52,15 +53,16 @@ function removeTextBox(){
     }
 }
 
-function getInformation(){
-    var vertNumber = (document.getElementById("inputText") as HTMLInputElement).value;
-    inputVectors = document.querySelector("inputVectors");
-    contVectors = document.querySelector("contVectors");
+function getInformation() {
+    console.log(document.getElementById("inputText"));
+    let vertNumber = document.getElementById("inputText");
+    //inputVectors = document.querySelector("inputVectors");
+    //contVectors = document.querySelector("contVectors");
     let dimension = GetOptionRX();
-    console.log(dimension);
+    //console.log(dimension);
 
     //Verification part
-    if (vertNumber == "" || vertNumber.match(/[A-Z][a-z]/g)){
+    if (numVectors.value == "" || numVectors.value.match(/[A-Z][a-z]/g)){
         alert("Input must be a number.");
         return -1;
     }
@@ -77,13 +79,14 @@ function getInformation(){
             document.body.appendChild(clon);
             active = true;
         }
-        GenerateInputText(dimension, parseInt(vertNumber));
+        GenerateInputText(dimension, parseInt(vertNumber.value));
+        return 0;
     }
 }
 
-function GenerateInputText(col : number, rows : number){
-    inputVectors.style.display = 'none';
-    contVectors.style.display = 'contents';
+function GenerateInputText(col, rows) {
+    inputVectors.isVisible = false;
+    contVectors.isVisible = true;
     let addSpace = '<br>';
     let addRow1 = '<div id="';
     let addRow2 = '" class="row"></div>'
