@@ -9,7 +9,8 @@
       <div class="card-header">
         <h2>Proyecto de Algebra Lineal</h2>
       </div>
-      <!--Configuración de los vectores-->
+
+    <!--Configuración de los vectores-->
       <div class="card-body">
         <h5 class="card-title">Selecciona el número de columnas y filas</h5>
         <div class="container-fluid">
@@ -34,16 +35,27 @@
             </div>
             <div class="col">
               <h2>Introduce el número de vectores</h2>
-              <p></p>
+              <br>
               <input id="inputText" type="text" class="form-control" placeholder="Número de Vectores">
             </div>
           </div>
         </div>
-        <a id="btnAccept" href="#" class="btn btn-primary" onclick="getInformation();">Aceptar configuración</a>
+
+    <!--CONFIG BUTTONS-->
+        <br>
+        <div class="row">
+          <div class="col">
+            <a id="btnAccept" href="#" class="btn btn-primary btn-block" onclick="getInformation();">Aceptar configuración.</a>
+          </div>
+          <div class="col">
+            <button id="btnCancel" type="button" class="btn btn-outline-danger btn-block" onclick="removeTextBox();">Cancel Configuration.</button>
+          </div>
+        </div>
+
       </div>
     </div>
-    <!--Configuración de los vectores/-->
 
+    <!--Configuración de los vectores/-->
     <!--Input Vectors-->
       <div class="card text-center">
         <div id="inputVectors">
@@ -52,24 +64,28 @@
             <div class="spinner-border"/>
           </div>
         </div>
-
-        <template>
-          <div class="card text-center">
-            <div class="card-header">
-              <h2>Configuración de los vectores.</h2>
-            </div>
-
-            <div class="card-body">
-              <h5 class="card-title">Ingrese los valores de los vectores.</h5>
-              <div id="vectorsContent" class="container-fluid">
-              </div>
+        
+      <template>
+        <div id="contVectors" class="card text-center">
+          <div class="card-header">
+            <h2>Configuración de los vectores.</h2>
+          </div
+          <div class="card-body">
+            <h5 class="card-title">Ingrese los valores de los vectores.</h5>
+    <!--HTML INJECTION-->
+            <div id="controlVectors">
+              <div id="vectorsContent" class="container-fluid"></div>
               <button id="btnComprobate"type="button" class="btn btn-primary btn-lg btn-block">Comprobar linealidad.</button>
             </div>
-
           </div>
-        </template>
+
+        </div>
+      </template>
 
       </div>
+
+
+    <!--STYLE-CONFIG-->
 
     <!--JS-->
     <script src="js/app.js"></script>

@@ -1,4 +1,3 @@
-let matrix;
 let number = 0;
 let active = false;
 
@@ -11,6 +10,22 @@ function GetOptionRX(){
         return 4;
     else
         return -3;
+}
+
+function removeTextBox(){
+    if(active){
+        for(var i = 0; i < number; i++){
+            var element = document.getElementById("textBox" + i.toString());
+            element.parentNode.removeChild(element);
+        }
+        number = 0;
+        vectorsContent.parentNode.removeChild(vectorsContent);
+        btnComprobate.parentNode.removeChild(btnComprobate);
+        controlVectors.innerHTML += '<div id="vectorsContent" class="container-fluid"></div>';
+        controlVectors.innerHTML += '<button id="btnComprobate"type="button" class="btn btn-primary btn-lg btn-block">Comprobar linealidad.</button>';
+        //controlVectors.style.display = 'none';
+        inputVectors.style.display = 'contents';
+    }
 }
 
 function getInformation(){
@@ -41,14 +56,7 @@ function getInformation(){
     }
 }
 
-function Create2DArray(x, y){
-    matrix = new Array(x);
-    for(var i = 0; i < y; i++)
-        matrix[i] = new Array(x);
-}
-
 function GenerateInputText(col, rows){
-    Create2DArray(col, rows);
     let addSpace = '<br>';
     let addRow1 = '<div id="';
     let addRow2 = '" class="row"></div>'
@@ -61,14 +69,16 @@ function GenerateInputText(col, rows){
         let supPosition = document.getElementById("row" + y.toString())
 
         for(var x = 0; x < col; x++){
-            let tempInput = addCol + "tempText" + number.toString() + addInput2;
+            let tempInput = addCol + "textBox" + number.toString() + addInput2;
             supPosition.innerHTML += addSpace;
             supPosition.innerHTML += tempInput;
             supPosition.innerHTML += addSpace;
             supPosition.innerHTML += addSpace;
-            matrix[y][x] = "tempText" + number.toString();
-            console.debug(matrix[y][x]);
             number++;
         }
     }
+}
+
+function CalculateVectors(){
+    
 }
