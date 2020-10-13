@@ -1,3 +1,4 @@
+const configWait = document.getElementById("inputVectors");
 let number = 0;
 let active = false;
 
@@ -30,12 +31,11 @@ function removeTextBox(){
 
 function getInformation(){
     let vertNumber = document.getElementById("inputText").value;
-    let configWait = document.getElementById("inputVectors");
     let dimension = GetOptionRX();
     console.log(dimension);
 
     //Verification part
-    if (isNaN(vertNumber) || vertNumber == ""){
+    if (isNaN(vertNumber) || vertNumber == "") {
         alert("Input must be a number.");
         return -1;
     }
