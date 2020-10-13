@@ -15,7 +15,7 @@ function getInformation(){
         let temp = document.getElementsByTagName("template")[0];
         let clon = temp.content.cloneNode(true);
         document.body.appendChild(clon);
-        GenerateInputText(3, 3);
+        GenerateInputText(2, 2);
     }
 }
 
@@ -26,13 +26,17 @@ function GenerateInputText(col, rows){
     let addInput = '<input id="inputText" type="text" class="form-control">';
     let position = document.getElementById("vectorsContent");
     for(var y = 0; y < rows; y++){
-        position.innerHTML += addRow;
-        addInput.replace("row", "row" + x);
+        let temprow = addRow;
+        temprow.replace("row", "row" + y.toString());
+        position.innerHTML += temprow;
+        
         //let positionCol = document.getElementById("row" + x);
         for(var x = 0; x < col; x++){
+            let tempInput = addInput;
             position.innerHTML += addSpace;
+            tempInput.replace("inputText", "inputText" + x.toString());
             position.innerHTML += addCol;
-            position.innerHTML += addInput;
+            position.innerHTML += tempInput;
         }
     }
 }
