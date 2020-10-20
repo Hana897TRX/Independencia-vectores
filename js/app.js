@@ -84,6 +84,14 @@ function GenerateInputText(col, rows){
 }
 
 function GetVectorValue(x, y){
+    var temp = document.getElementById("textBox" + ((y * dimension) + x).toString()).value;
+    var regex = new RegExp('/');
+
+    if(temp.match(regex)){
+        var ar = temp.split("/");
+        console.log(ar);
+        return parseFloat(ar[0]) / parseFloat(ar[1]);
+    }
     return parseFloat(document.getElementById("textBox" + ((y * dimension) + x).toString()).value);
 }
 
