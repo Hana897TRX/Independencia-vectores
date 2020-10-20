@@ -84,16 +84,10 @@ function GenerateInputText(col, rows){
 }
 
 function GetVectorValue(x, y){
-    //if(x == 0 && y != 0){
-        //x = 1;
-    //}
     return parseFloat(document.getElementById("textBox" + ((y * dimension) + x).toString()).value);
 }
 
 function SetVectorValue(x, y, value){
-    //if(x == 0 && y != 0){
-        //x = 1;
-    //}
     document.getElementById("textBox" + ((y * dimension) + x).toString()).value = value.toString();
 }
 
@@ -101,49 +95,42 @@ function CalculateVectors(){
     console.log("Run vector calc");
     if(vertNumber == 1 || vertNumber == dimension || vertNumber > dimension){
         for(var y = 0; y < vertNumber; y++){
-            
+
             var z = 0;
             while(z < dimension - 1 && GetVectorValue(z, y) == 0){
                 z++
             }
-
+            
+            //Matrix reduction
             if(GetVectorValue(z, y) != 0){
                 DividirFila(GetVectorValue(z, y), z, y);
                 for(var topY = y -1; topY >= 0; topY--){
                     DeleteZeroUp(z, topY, y);
                 }
             }
+        }
 
-            //Count pivotes
-            var pivotes = [];
-            for(var y = 0; y < vertNumber; y++){
-                for(var z = 0; z < dimension; z++){
-                    if(GetVectorValue(z, y) != 0){
-                        pivotes.push(z);
-                        break;
-                    }
+        //Count pivotes
+        var pivotes = [];
+        for(var y = 0; y < vertNumber; y++){
+            for(var z = 0; z < dimension; z++){
+                if(GetVectorValue(z, y) != 0){
+                    pivotes.push(z);
+                    break;
                 }
             }
-
-            //Verify
-            // var numPivotes = 0;
-            // for(var x = 0; x < dimension; x++){
-            //     for(var yC = 0; yC < vertNumber; yC++){
-            //         if(GetVectorValue(x, yC) == 1){
-            //             numPivotes++;
-            //         }
-            //     }
-            // }
-
-            if(vertNumber == 1 || dimension == 1 || pivotes.length == dimension){
-                alert("<Vectores Independientes>.");
-                //Send message to user. "<Independientes>"
-            }
-            else{
-                alert("<Vectores dependientes>.");
-                //Send message to user. "<Dependientes>"
-            }
         }
+
+        //Validation and result
+        if(vertNumber == 1 || dimension == 1 || pivotes.length == dimension){
+            alert("<Vectores Independientes>.");
+            //Send message to user. "<Independientes>"
+        }
+        else{
+            alert("<Vectores dependientes>.");
+            //Send message to user. "<Dependientes>"
+        }
+        //Debug
         console.log("Program finished correctly");
     }
     else{
@@ -163,13 +150,15 @@ function DividirFila(_num, _x, _y){
 
 //-These functions can be reduced
 function DeleteZeroBelow(_x, _y, _topY){
+    
     var num = GetVectorValue(_x, _y);
     for(var x = 0; x < dimension; x++){
         SetVectorValue(x, _y, GetVectorValue(x, _y) + GetVectorValue(x, _topY) * num * -1);
     }
 }
 
-function DeleteZeroUp(_x, _u, _botY){
+function DeleteZeroUp(_x, _y, _botY){
+
     var num = GetVectorValue(_x, _y);
     for(var x = 0; x < dimension; x++){
         SetVectorValue(x, _y, GetVectorValue(x, _y) + GetVectorValue(x, _botY) * num * -1);
