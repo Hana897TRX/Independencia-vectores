@@ -142,6 +142,7 @@ function CalculateVectors(){
         console.log("Program finished correctly");
     }
     else{
+        alert("<Vectores dependientes>, el número de vectores es menor al número de incognitas.");
         console.log("Something happend");
     }
 }
