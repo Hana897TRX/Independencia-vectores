@@ -1,6 +1,8 @@
 const configWait = document.getElementById("inputVectors");
 let number = 0;
 let active = false;
+let dimension = 0;
+let vertNumber = 0;
 
 function GetOptionRX(){
     if(document.getElementById("r2").checked)
@@ -23,15 +25,15 @@ function removeTextBox(){
         vectorsContent.parentNode.removeChild(vectorsContent);
         btnComprobate.parentNode.removeChild(btnComprobate);
         controlVectors.innerHTML += '<div id="vectorsContent" class="container-fluid"></div>';
-        controlVectors.innerHTML += '<button id="btnComprobate"type="button" class="btn btn-primary btn-lg btn-block">Comprobar linealidad.</button>';
+        controlVectors.innerHTML += '<button id="btnComprobate"type="button" onClick="CalculateVectors()" class="btn btn-primary btn-lg btn-block">Comprobar linealidad.</button>';
         inputVectors.style.display = 'contents';
         contVectors.style.display = 'none';
     }
 }
 
 function getInformation(){
-    let vertNumber = document.getElementById("inputText").value;
-    let dimension = GetOptionRX();
+    vertNumber = parseInt(document.getElementById("inputText").value);
+    dimension = GetOptionRX();
     console.log(dimension);
 
     //Verification part
@@ -81,6 +83,96 @@ function GenerateInputText(col, rows){
     }
 }
 
-function CalculateVectors(){
-    
+function GetVectorValue(x, y){
+    //if(x == 0 && y != 0){
+        //x = 1;
+    //}
+    return parseFloat(document.getElementById("textBox" + ((y * dimension) + x).toString()).value);
 }
+
+function SetVectorValue(x, y, value){
+    //if(x == 0 && y != 0){
+        //x = 1;
+    //}
+    document.getElementById("textBox" + ((y * dimension) + x).toString()).value = value.toString();
+}
+
+function CalculateVectors(){
+    console.log("Run vector calc");
+    if(vertNumber == 1 || vertNumber == dimension || vertNumber > dimension){
+        for(var y = 0; y < vertNumber; y++){
+            
+            var z = 0;
+            while(z < dimension - 1 && GetVectorValue(z, y) == 0){
+                z++
+            }
+
+            if(GetVectorValue(z, y) != 0){
+                DividirFila(GetVectorValue(z, y), z, y);
+                for(var topY = y -1; topY >= 0; topY--){
+                    DeleteZeroUp(z, topY, y);
+                }
+            }
+
+            //Count pivotes
+            var pivotes = [];
+            for(var y = 0; y < vertNumber; y++){
+                for(var z = 0; z < dimension; z++){
+                    if(GetVectorValue(z, y) != 0){
+                        pivotes.push(z);
+                        break;
+                    }
+                }
+            }
+
+            //Verify
+            // var numPivotes = 0;
+            // for(var x = 0; x < dimension; x++){
+            //     for(var yC = 0; yC < vertNumber; yC++){
+            //         if(GetVectorValue(x, yC) == 1){
+            //             numPivotes++;
+            //         }
+            //     }
+            // }
+
+            if(vertNumber == 1 || dimension == 1 || pivotes.length == dimension){
+                alert("<Vectores Independientes>.");
+                //Send message to user. "<Independientes>"
+            }
+            else{
+                alert("<Vectores dependientes>.");
+                //Send message to user. "<Dependientes>"
+            }
+        }
+        console.log("Program finished correctly");
+    }
+    else{
+        console.log("Something happend");
+    }
+}
+
+function DividirFila(_num, _x, _y){
+    for(var x = _x; x < dimension; x++){
+        SetVectorValue(x, _y, GetVectorValue(x, _y) / _num);
+    }
+
+    for(var movY = _y + 1; movY < vertNumber; movY++){
+        DeleteZeroBelow(_x, movY, _y);
+    }
+}
+
+//-These functions can be reduced
+function DeleteZeroBelow(_x, _y, _topY){
+    var num = GetVectorValue(_x, _y);
+    for(var x = 0; x < dimension; x++){
+        SetVectorValue(x, _y, GetVectorValue(x, _y) + GetVectorValue(x, _topY) * num * -1);
+    }
+}
+
+function DeleteZeroUp(_x, _u, _botY){
+    var num = GetVectorValue(_x, _y);
+    for(var x = 0; x < dimension; x++){
+        SetVectorValue(x, _y, GetVectorValue(x, _y) + GetVectorValue(x, _botY) * num * -1);
+    }
+}
+//-
