@@ -101,7 +101,26 @@ function SetVectorValue(x, y, value){
 
 function CalculateVectors(){
     console.log("Run vector calc");
-    if(vertNumber == 1 || vertNumber == dimension || vertNumber < dimension){
+    if(vertNumber == 1 || vertNumber == dimension || vertNumber > dimension){
+        
+        // Verify multiple of V1 to V2 and so on...
+        for(var y = 0; y < vertNumber; y++){
+            var verif = 0;
+            for(var j = 0; j < vertNumber; j++){
+                for(var x = 0; x<dimension; x++){
+                    if(y != j){
+                        if(GetVectorValue(y,x) % GetVectorValue(j,x) == 0 )
+                            verif++;
+                    }
+                }
+            }
+            if(verif == dimension){
+                alert("<Vectores Dependientes> Un vector es multiplo de otro.");
+                break;
+            }
+        }
+
+        
         for(var y = 0; y < vertNumber; y++){
 
             var z = 0;
@@ -142,7 +161,7 @@ function CalculateVectors(){
         console.log("Program finished correctly");
     }
     else{
-        alert("<Vectores dependientes>, el número de vectores es mayor a la dimension.");
+        alert("<Vectores dependientes>, el número de vectores es menor a la dimension.");
         console.log("Something happend");
     }
 }
