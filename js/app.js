@@ -101,7 +101,7 @@ function SetVectorValue(x, y, value){
 
 function CalculateVectors(){
     console.log("Run vector calc");
-    if(vertNumber == 1 || vertNumber == dimension || vertNumber > dimension){
+    if(vertNumber == 1 || vertNumber == dimension || vertNumber < dimension){
         for(var y = 0; y < vertNumber; y++){
 
             var z = 0;
@@ -142,7 +142,7 @@ function CalculateVectors(){
         console.log("Program finished correctly");
     }
     else{
-        alert("<Vectores dependientes>, el número de vectores es menor al número de incognitas.");
+        alert("<Vectores dependientes>, el número de vectores es mayor a la dimension.");
         console.log("Something happend");
     }
 }
