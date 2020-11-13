@@ -109,14 +109,15 @@ function CalculateVectors(){
             for(var j = 0; j < vertNumber; j++){
                 for(var x = 0; x<dimension; x++){
                     if(y != j){
-                        if(GetVectorValue(y,x) % GetVectorValue(j,x) == 0 )
+                        if((GetVectorValue(y,x) % GetVectorValue(j,x) == 0 ) &&
+                         (GetVectorValue(j,x) != 0 || GetVectorValue(y,x) != 0 )  )
                             verif++;
                     }
                 }
             }
             if(verif == dimension){
                 alert("<Vectores Dependientes> Un vector es multiplo de otro.");
-                break;
+                return -1;
             }
         }
 
