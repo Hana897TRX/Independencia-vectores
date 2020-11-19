@@ -101,7 +101,7 @@ function SetVectorValue(x, y, value){
 
 function CalculateVectors(){
     console.log("Run vector calc");
-    if(vertNumber == 1 || vertNumber == dimension || vertNumber > dimension){
+    if(vertNumber == 1 || vertNumber == dimension || vertNumber < dimension){
         
         // Verify multiple of V1 to V2 and so on...
         for(var y = 0; y < vertNumber; y++){
