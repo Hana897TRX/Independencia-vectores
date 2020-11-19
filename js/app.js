@@ -104,6 +104,7 @@ function CalculateVectors(){
     if(vertNumber == 1 || vertNumber == dimension || vertNumber > dimension){
         
         // Verify multiple of V1 to V2 and so on...
+        // Comment to commit
         for(var y = 0; y < vertNumber; y++){
             var verif = 0;
             for(var j = 0; j < vertNumber; j++){
